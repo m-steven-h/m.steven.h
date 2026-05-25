@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>M STEVEN H | مطوير تطبيقات ومواقع</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* إخفاء المؤشر الأصلي تماماً */
+        * {
+            cursor: none !important;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #000000;
+            color: #f1f5f9;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .latin-font {
+            font-family: 'Syne', sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #ffffff, #334155, #ffffff);
+            border-radius: 3px;
+        }
+
+        .chrome-text {
+            background: linear-gradient(
+                135deg,
+                #ffffff 0%,
+                #f1f5f9 25%,
+                #64748b 45%,
+                #ffffff 55%,
+                #1e293b 70%,
+                #cbd5e1 100%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: chrome-shine 8s linear infinite;
+        }
+
+        @keyframes chrome-shine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .chrome-border {
+            position: relative;
+            background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .chrome-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 21px;
+            padding: 1px;
+            background: linear-gradient(
+                135deg, 
+                rgba(255,255,255,0.4) 0%, 
+                rgba(15,15,15,0.1) 40%, 
+                rgba(255,255,255,0.6) 60%, 
+                rgba(15,15,15,0.1) 80%,
+                rgba(255,255,255,0.3) 100%
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.3;
+            transition: opacity 0.5s;
+        }
+
+        .chrome-border:hover::before {
+            opacity: 1;
+            background: linear-gradient(
+                270deg, 
+                #ffffff, 
+                #475569, 
+                #ffffff, 
+                #0f172a, 
+                #ffffff
+            );
+            background-size: 400% 400%;
+            animation: chrome-border-anim 4s ease infinite;
+        }
+
+        @keyframes chrome-border-anim {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+
+        .chrome-border:hover {
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.09);
+            transform: translateY(-6px);
+        }
+
+        .liquid-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .liquid-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        .liquid-btn:hover::after {
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+
+        .liquid-btn:hover {
+            background: #ffffff;
+            color: #000000;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            border-color: #ffffff;
+        }
+
+        /* الكيرسر القديم (النقطة اللي بتتكبر وتتصغر) */
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0.4) 40%, rgba(255,255,255,0) 70%);
+            border: 1.5px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        #custom-cursor-blur {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.01) 50%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+        .ticker-wrap {
+            display: flex;
+            width: 200%;
+            animation: ticker 25s linear infinite;
+        }
+
+        #preloader {
+            background-color: #000000;
+            z-index: 9999;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        
+        .nav-hidden {
+            display: none;
+        }
+
+        /* تنسيق روابط المشاريع لجعل البطاقة بأكملها قابلة للنقر */
+        .project-card-link {
+            text-decoration: none;
+            display: block;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="selection:bg-white selection:text-black">
+
+    <div id="preloader" class="fixed inset-0 flex flex-col justify-center items-center transition-all duration-1000">
+        <div class="relative flex flex-col items-center">
+            <div class="w-32 h-32 mb-8 relative flex items-center justify-center">
+                <svg viewBox="0 0 100 100" class="w-full h-full text-white animate-pulse">
+                    <path d="M50 15 L80 45 L50 75 L20 45 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="50" cy="45" r="5" fill="currentColor"/>
+                </svg>
+            </div>
+            <div class="w-64 h-1 bg-neutral-900 rounded-full overflow-hidden relative">
+                <div id="preloader-bar" class="h-full bg-gradient-to-r from-neutral-600 via-white to-neutral-600 w-0 transition-all duration-300"></div>
+            </div>
+            <div class="mt-4 flex items-center gap-2">
+                <span id="preloader-text" class="latin-font text-xl font-bold tracking-widest text-neutral-400">00</span>
+                <span class="text-neutral-600 text-sm font-medium">%</span>
+            </div>
+            <p class="mt-2 text-xs tracking-widest text-neutral-600 uppercase">جاري تجميع مصفوفة التعليمات الكرومية...</p>
+        </div>
+    </div>
+
+    <!-- الكيرسر القديم: نقطة دائرية + تأثير بلور -->
+    <div id="custom-cursor" class="fixed top-0 left-0 pointer-events-none rounded-full z-[10000] -translate-x-1/2 -translate-y-1/2 hidden md:block"></div>
+    <div id="custom-cursor-blur" class="fixed top-0 left-0 pointer-events-none rounded-full z-[9999] -translate-x-1/2 -translate-y-1/2 hidden md:block"></div>
+
+    <!-- Header: تم إزالة زر "تواصل معي" وتم توسيط الاسم فقط -->
+    <header class="fixed top-0 left-0 right-0 z-40 px-6 py-5 bg-black/40 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-6xl mx-auto flex items-center justify-center">
+            <a href="#" class="flex items-center gap-3 group">
+                <span class="latin-font text-2xl font-black tracking-tighter text-white">
+                    M<span class="chrome-text">STEVEN</span>H
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <section id="hero" class="relative min-h-screen flex flex-col justify-center items-center px-6 pt-32 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-br from-neutral-900/30 to-transparent rounded-full blur-[140px]"></div>
+            <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none select-none">
+                <svg viewBox="0 0 1000 350" class="w-[90%] md:w-[65%] h-auto text-white">
+                    <path d="M 50 150 C 120 80, 200 120, 280 80 C 350 40, 420 180, 500 120 C 580 60, 650 160, 720 100 C 800 40, 880 120, 950 150 Z" fill="none" stroke="currentColor" stroke-width="3" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+            <div class="lg:col-span-5 flex justify-center order-first lg:order-last">
+                <div class="relative w-72 h-80 sm:w-80 sm:h-96 chrome-border p-3 flex items-center justify-center overflow-hidden group">
+                    <div class="absolute inset-3 bg-neutral-950 rounded-2xl overflow-hidden border border-white/5">
+                        <img id="avatar-image" 
+                             src="me.png"
+                             alt="صورة المبرمج الشخصية" 
+                             onerror="this.style.display='none'; document.getElementById('avatar-fallback').style.display='flex';"
+                             class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
+                        <div id="avatar-fallback" class="hidden absolute inset-0 flex-col items-center justify-center bg-neutral-900 text-neutral-400">
+                            <i class="fas fa-code w-16 h-16 mb-4 text-white animate-pulse text-5xl"></i>
+                            <span class="text-xs tracking-wider uppercase latin-font">CRAFTING SOFTWARE</span>
+                        </div>
+                    </div>
+                    <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-white/30 rounded-tl-xl"></div>
+                    <div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-white/30 rounded-tr-xl"></div>
+                    <div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-white/30 rounded-bl-xl"></div>
+                    <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white/30 rounded-br-xl"></div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 flex flex-col items-start text-right">
+                <div class="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full mb-6">
+                    <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+                    <span class="text-xs font-semibold tracking-widest text-neutral-300 uppercase latin-font">PROGRAMMING</span>
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none mb-6">
+                    مرحباً، أنا ستيفن<br>
+                    <span class="chrome-text">مبرمج ومطور إبداعي</span>
+                </h1>
+                <p class="text-neutral-400 text-sm sm:text-lg max-w-xl mb-8 leading-relaxed">
+                    أقوم ببرمجة وهندسة المواقع والأنظمة الرقمية المبتكرة. أدمج الأكواد البرمجية القوية والتطوير ثلاثي الأبعاد لإنشاء منتجات تفاعلية تتجاوز حدود الخيال.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <a href="#contact" class="liquid-btn px-8 py-4 rounded-xl text-xs font-bold tracking-wider text-white flex items-center justify-center gap-2">
+                        <span>تواصل معي</span>
+                        <i class="fas fa-terminal w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+            <a href="#works" class="text-neutral-500 hover:text-white transition-colors">
+                <i class="fas fa-chevron-down w-6 h-6"></i>
+            </a>
+        </div>
+    </section>
+
+    <section id="works" class="py-32 px-6 max-w-6xl mx-auto relative">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-4">
+            <div>
+                <span class="text-xs font-bold tracking-widest text-neutral-500 uppercase latin-font">MY REPOSITORIES</span>
+                <h2 class="text-3xl md:text-5xl font-black mt-2">تحف <span class="chrome-text">برمجية تم</span> تطويرها</h2>
+            </div>
+            <p class="text-neutral-400 text-sm md:text-base max-w-md leading-relaxed">
+                معرض لأبرز النظم، التطبيقات البرمجية التفاعلية، والتجارب الرقمية ثلاثية الأبعاد التي قمت ببرمجتها وتطويرها. اضغط على أي مشروع لزيارة الصفحة التفصيلية.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- المشروع الأول: رابط خارجي لموقع تفصيلي لمحاكي السوائل -->
+            <a href="https://m-steven-h.github.io/fluid-sandbox/" target="_blank" class="project-card-link" rel="noopener noreferrer">
+                <div class="chrome-border p-6 flex flex-col justify-between h-[380px] group overflow-hidden cursor-pointer">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <i class="fas fa-code w-8 h-8 text-neutral-500 group-hover:text-white transition-colors text-3xl"></i>
+                            <span class="text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-neutral-400 latin-font">REACT / THREE.JS</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-neutral-300 transition-colors">محاكي السوائل الكرومية ثلاثي الأبعاد</h3>
+                        <p class="text-neutral-400 text-xs mt-3 leading-relaxed">
+                            تطوير محرك فيزيائي تفاعلي حقيقي مرسوم على متصفح الويب للتحكم بحركات جزيئات الفضة والزئبق السائل اعتماداً على محاور الفأرة.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-6 border-t border-white/5">
+                        <span class="text-xs font-mono text-neutral-500">github/fluid-sandbox</span>
+                        <i class="fas fa-external-link-alt w-4 h-4 text-neutral-500 group-hover:text-white transition-transform duration-300"></i>
+                    </div>
+                </div>
+            </a>
+            <!-- المشروع الثاني: رابط خارجي لمنصة أوبسيديان -->
+            <a href="https://m-steven-h.github.io/obsidian-db/" target="_blank" class="project-card-link" rel="noopener noreferrer">
+                <div class="chrome-border p-6 flex flex-col justify-between h-[380px] group overflow-hidden cursor-pointer">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <i class="fas fa-database w-8 h-8 text-neutral-500 group-hover:text-white transition-colors text-3xl"></i>
+                            <span class="text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-neutral-400 latin-font">NODEJS / GRAPHQL</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-neutral-300 transition-colors">منصة أوبسيديان لإدارة البيانات الضخمة</h3>
+                        <p class="text-neutral-400 text-xs mt-3 leading-relaxed">
+                            بناء نظام سحابي متكامل وقاعدة بيانات عالية السرعة تتيح معالجة البيانات بسرعة فائقة مع واجهة مستخدم تفاعلية مشفرة بالكامل.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-6 border-t border-white/5">
+                        <span class="text-xs font-mono text-neutral-500">github/obsidian-db</span>
+                        <i class="fas fa-external-link-alt w-4 h-4 text-neutral-500 group-hover:text-white transition-transform duration-300"></i>
+                    </div>
+                </div>
+            </a>
+            <!-- المشروع الثالث: رابط خارجي لمولّد الذكاء الاصطناعي -->
+            <a href="https://m-steven-h.github.io/spiky-metal-generator/" target="_blank" class="project-card-link" rel="noopener noreferrer">
+                <div class="chrome-border p-6 flex flex-col justify-between h-[380px] group overflow-hidden cursor-pointer">
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <i class="fas fa-microchip w-8 h-8 text-neutral-500 group-hover:text-white transition-colors text-3xl"></i>
+                            <span class="text-[10px] bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-neutral-400 latin-font">PYTHON / PYTORCH</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-neutral-300 transition-colors">خوارزمية ذكاء اصطناعي لتوليد الأشكال الشوكية</h3>
+                        <p class="text-neutral-400 text-xs mt-3 leading-relaxed">
+                            برمجة وتدريب نموذج ذكاء اصطناعي يقوم بتحليل وتوليد الشعارات الفنية الحادة الميتاليك بشكل آلي بناءً على توجهات الموسيقى القوطية.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-6 border-t border-white/5">
+                        <span class="text-xs font-mono text-neutral-500">github/spiky-metal-generator</span>
+                        <i class="fas fa-external-link-alt w-4 h-4 text-neutral-500 group-hover:text-white transition-transform duration-300"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- مهاراتي - قسمان فقط (برمجة التطبيقات - برمجة المواقع) -->
+    <section id="expertise" class="py-32 bg-neutral-950/50 relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <span class="text-xs font-bold tracking-widest text-neutral-500 uppercase latin-font">EXPERTISE FIELD</span>
+                <h2 class="text-3xl md:text-5xl font-black mt-2"><span class="chrome-text">مجالات خبرتي</span></h2>
+                <p class="text-neutral-400 mt-4 max-w-xl mx-auto">
+                    أتقن بناء الأنظمة المتكاملة من الصفر، سواءً كانت تطبيقات للموبايل أو منصات ويب عملاقة.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <!-- برمجة التطبيقات (App Development) -->
+                <div class="chrome-border p-8 hover:scale-[1.02] transition-transform duration-300">
+                    <div class="w-16 h-16 bg-neutral-900 rounded-2xl flex items-center justify-center mb-6 border border-neutral-800">
+                        <i class="fas fa-mobile-alt text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">برمجة التطبيقات</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                        تطوير تطبيقات أندرويد و iOS متكاملة بأداء سحري، باستخدام أحدث التقنيات مثل Flutter و Kotlin و Swift، مع تكامل backend قوي وتجربة مستخدم سلسة.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[11px] font-mono px-3 py-1.5 bg-white/5 rounded-full border border-white/10">Flutter / Dart</span>
+                        <span class="text-[11px] font-mono px-3 py-1.5 bg-white/5 rounded-full border border-white/10">Kotlin</span>
+                        <span class="text-[11px] font-mono px-3 py-1.5 bg-white/5 rounded-full border border-white/10">SwiftUI</span>
+                        <span class="text-[11px] font-mono px-3 py-1.5 bg-white/5 rounded-full border border-white/10">Firebase</span>
+                        <span class="text-[11px] font-mono px-3 py-1.5 bg-white/5 rounded-full border border-white/10">React Native</span>
+                    </div>
+                </div>
+                <!-- برمجة المواقع (Web Development) -->
+                <div class="chrome-border p-8 hover:scale-[1.02] transition-transform duration-300">
+                    <div class="w-16 h-16 bg-neutral-900 rounded-2xl flex items-center justify-center mb-6 border border-neutral-800">
+                        <i class="fas fa-globe text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">برمجة المواقع</h3>
+                    <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+                        بناء مواقع عصرية سريعة الأداء، متجاوبة مع جميع الأجهزة، مع واجهات تفاعلية ثلاثية الأبعاد وهندسة خلفية متينة باستخدام أشهر أطر الويب.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[11px] font-mono px-3 py-1.5 bg-white/5 rounded-full border border-white/10">React.js / Next.js</span>
+                        <span class="text-[11px] font-mono px-3 py-1.5 bg-white/5 rounded-full border border-white/10">Node.js / Express</span>
+                        <span class="text-[11px] font-mono px-3 py-1.5 bg-white/5 rounded-full border border-white/10">Tailwind / Three.js</span>
+                        <span class="text-[11px] font-mono px-3 py-1.5 bg-white/5 rounded-full border border-white/10">MongoDB / PostgreSQL</span>
+                        <span class="text-[11px] font-mono px-3 py-1.5 bg-white/5 rounded-full border border-white/10">Docker / AWS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="showcase" class="py-32 px-6 max-w-6xl mx-auto relative overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-5">
+                <span class="text-xs font-bold tracking-widest text-neutral-500 uppercase latin-font">Liquid laboratory</span>
+                <h2 class="text-3xl md:text-5xl font-black mt-2 leading-tight">المختبر <span class="chrome-text">السائل</span></h2>
+                <p class="text-neutral-400 mt-6 leading-relaxed">
+                    من خلال خوارزميات حسابية برمجية تفاعلية، يمكنك تشويه وتعديل حركة وسلوك هذه الكتلة المعدنية السائلة مباشرة بلمس الشاشة أو تحريك الماوس.
+                </p>
+                <div class="mt-8 flex flex-col gap-4">
+                    <div class="flex items-center gap-4 text-sm text-neutral-400">
+                        <i class="fas fa-mouse-pointer text-white text-xl"></i>
+                        <span>حرك الفأرة للتلاعب بتموج وتشكيل الجزيئات.</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-sm text-neutral-400">
+                        <i class="fas fa-sparkles text-white text-xl"></i>
+                        <span>انقر لتوليد موجات ارتدادية سريعة في الكتلة.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-7 flex justify-center items-center relative h-[450px] chrome-border overflow-hidden">
+                <canvas id="liquidCanvas" class="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing"></canvas>
+                <div class="absolute bottom-4 right-4 bg-black/80 backdrop-blur border border-white/10 px-3 py-1.5 rounded-full text-xs text-neutral-400 pointer-events-none latin-font">
+                    PhysicsEngineJS v1.0 [Active]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-black border-y border-white/5 overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 mb-8 text-center">
+            <span class="text-xs font-bold tracking-[0.2em] text-neutral-600 uppercase">لغات برمجية مفضلة لدي</span>
+        </div>
+        <div class="relative w-full overflow-hidden">
+            <div class="ticker-wrap gap-12 text-2xl font-black uppercase tracking-widest text-neutral-700">
+                <span class="mx-4 flex items-center gap-2 hover:text-white transition-colors duration-300 cursor-default latin-font">DART</span>
+                <span class="mx-4 flex items-center gap-2 hover:text-white transition-colors duration-300 cursor-default latin-font">PYTHON</span>
+                <span class="mx-4 flex items-center gap-2 hover:text-white transition-colors duration-300 cursor-default latin-font">HTML</span>
+                <span class="mx-4 flex items-center gap-2 hover:text-white transition-colors duration-300 cursor-default latin-font">CSS</span>
+                <span class="mx-4 flex items-center gap-2 hover:text-white transition-colors duration-300 cursor-default latin-font">JAVA</span>
+                <span class="mx-4 flex items-center gap-2 hover:text-white transition-colors duration-300 cursor-default latin-font">JAVASCRIPT</span>
+                <span class="mx-4 flex items-center gap-2 hover:text-white transition-colors duration-300 cursor-default latin-font">SWIFT</span>
+                <span class="mx-4 flex items-center gap-2 hover:text-white transition-colors duration-300 cursor-default latin-font">KOTLIN</span>
+                <span class="mx-4 flex items-center gap-2 hover:text-white transition-colors duration-300 cursor-default latin-font">TYPESCRIPT</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 px-6 max-w-5xl mx-auto relative">
+        <div class="text-center mb-16">
+            <span class="text-xs font-bold tracking-widest text-neutral-500 uppercase latin-font">contact me</span>
+            <h2 class="text-3xl md:text-5xl font-black mt-2"><span class="chrome-text">تواصل معي</span></h2>
+            <p class="text-neutral-400 mt-4 max-w-lg mx-auto">
+                يسعدني دائماً تواصلك معي للعمل على مشاريع برمجية جديدة أو استشارات تقنية متخصصة عبر قنوات التواصل المفضلة لديك.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a href="https://github.com/m-steven-h" target="_blank" class="chrome-border p-6 flex items-center gap-4 group hover:bg-neutral-900/40">
+                <div class="w-12 h-12 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 group-hover:text-white transition-colors">
+                    <i class="fab fa-github text-2xl"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-0.5">GitHub</h4>
+                    <p class="text-xs text-neutral-500 font-mono">@m-steven-h</p>
+                </div>
+            </a>
+            <a href="https://www.facebook.com/m.steven.h" target="_blank" class="chrome-border p-6 flex items-center gap-4 group hover:bg-neutral-900/40">
+                <div class="w-12 h-12 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 group-hover:text-white transition-colors">
+                    <i class="fab fa-facebook text-2xl"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-0.5">facebook</h4>
+                    <p class="text-xs text-neutral-500 font-mono">@m.steven.h</p>
+                </div>
+            </a>
+            <a href="https://www.tiktok.com/@m.steven.h" target="_blank" class="chrome-border p-6 flex items-center gap-4 group hover:bg-neutral-900/40">
+                <div class="w-12 h-12 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 group-hover:text-white transition-colors">
+                    <i class="fab fa-tiktok text-2xl"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-0.5">TikTok</h4>
+                    <p class="text-xs text-neutral-500 font-mono">@m.steven.h</p>
+                </div>
+            </a>
+            <a href="https://www.instagram.com/m.steven.h" target="_blank" class="chrome-border p-6 flex items-center gap-4 group hover:bg-neutral-900/40">
+                <div class="w-12 h-12 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 group-hover:text-white transition-colors">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-0.5">Instagram</h4>
+                    <p class="text-xs text-neutral-500 font-mono">@m.steven.h</p>
+                </div>
+            </a>
+            <a href="https://t.me/m_steven_h" target="_blank" class="chrome-border p-6 flex items-center gap-4 group hover:bg-neutral-900/40">
+                <div class="w-12 h-12 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 group-hover:text-white transition-colors">
+                    <i class="fab fa-telegram-plane text-2xl"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-white mb-0.5">Telegram</h4>
+                    <p class="text-xs text-neutral-500 font-mono">@m_steven_h</p>
+                </div>
+            </a>
+            <div onclick="copyEmailAddress(this)" class="chrome-border p-6 flex items-center gap-4 group hover:bg-neutral-900/40 cursor-pointer">
+                <div class="w-12 h-12 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 group-hover:text-white transition-colors">
+                    <i class="far fa-envelope text-2xl"></i>
+                </div>
+                <div class="flex-grow">
+                    <h4 id="email-label" class="text-sm font-bold text-white mb-0.5">Email</h4>
+                    <p id="email-address" class="text-xs text-neutral-500 font-mono">steven.hany.194@gmail.com</p>
+                </div>
+                <i class="far fa-copy text-neutral-500 group-hover:text-white transition-colors text-lg"></i>
+            </div>
+        </div>
+        <div id="copyToast" class="fixed bottom-6 right-6 bg-white text-black font-bold px-6 py-3 rounded-xl shadow-2xl z-50 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none flex items-center gap-2">
+            <i class="fas fa-check-circle w-4 h-4"></i>
+            <span class="text-xs">تم نسخ البريد الإلكتروني بنجاح!</span>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-white/5 px-6">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <span class="latin-font text-xl font-bold tracking-tighter text-white">
+                M<span class="chrome-text">STEVEN</span>H
+            </span>
+            <p class="text-neutral-600 text-xs text-center">
+                &copy;  2026 جميع الحقوق محفوظة.
+            </p>
+            <a href="#hero" class="text-neutral-500 hover:text-white transition-colors text-xs flex items-center gap-1.5">
+                <span>العودة للأعلى</span>
+                <i class="fas fa-arrow-up w-3 h-3"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const bar = document.getElementById('preloader-bar');
+            const text = document.getElementById('preloader-text');
+            const preloader = document.getElementById('preloader');
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 20) + 5;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        preloader.classList.add('opacity-0', 'pointer-events-none');
+                        setTimeout(() => preloader.style.display = 'none', 1000);
+                    }, 400);
+                }
+                bar.style.width = progress + '%';
+                text.innerText = progress < 10 ? '0' + progress : progress;
+            }, 100);
+        });
+
+        // الكيرسر القديم (نقطة تكبر وتتصغر)
+        const cursor = document.getElementById('custom-cursor');
+        const cursorBlur = document.getElementById('custom-cursor-blur');
+        document.addEventListener('mousemove', (e) => {
+            if(cursor) cursor.style.left = e.clientX + 'px';
+            if(cursor) cursor.style.top = e.clientY + 'px';
+            if(cursorBlur) {
+                cursorBlur.style.left = e.clientX + 'px';
+                cursorBlur.style.top = e.clientY + 'px';
+            }
+        });
+        const interactiveElements = document.querySelectorAll('a, button, input, textarea, canvas, [role="button"], .cursor-pointer, .liquid-btn, .chrome-border, .project-card-link');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                if(cursor) { cursor.style.width = '35px'; cursor.style.height = '35px'; cursor.style.backgroundColor = 'rgba(255,255,255,0.1)'; }
+                if(cursorBlur) { cursorBlur.style.width = '500px'; cursorBlur.style.height = '500px'; }
+            });
+            el.addEventListener('mouseleave', () => {
+                if(cursor) { cursor.style.width = '20px'; cursor.style.height = '20px'; cursor.style.backgroundColor = 'transparent'; }
+                if(cursorBlur) { cursorBlur.style.width = '400px'; cursorBlur.style.height = '400px'; }
+            });
+        });
+
+        // إخفاء المؤشر الأصلي بشكل نهائي
+        const style = document.createElement('style');
+        style.innerHTML = '* { cursor: none !important; }';
+        document.head.appendChild(style);
+
+        // Liquid Canvas Simulation
+        const canvas = document.getElementById('liquidCanvas');
+        if(canvas) {
+            const ctx = canvas.getContext('2d');
+            let points = [];
+            let numPoints = 80;
+            let radius = 120;
+            let centerX, centerY;
+            let mouse = { x: 0, y: 0, targetX: 0, targetY: 0, radius: 100, strength: 0 };
+            let pulseStrength = 0;
+            function resizeCanvas() {
+                const rect = canvas.parentNode.getBoundingClientRect();
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+                centerX = canvas.width / 2;
+                centerY = canvas.height / 2;
+                initBlob();
+            }
+            window.addEventListener('resize', resizeCanvas);
+            function initBlob() {
+                points = [];
+                for (let i = 0; i < numPoints; i++) {
+                    let angle = (i / numPoints) * Math.PI * 2;
+                    points.push({
+                        x: centerX + Math.cos(angle) * radius,
+                        y: centerY + Math.sin(angle) * radius,
+                        originX: Math.cos(angle) * radius,
+                        originY: Math.sin(angle) * radius,
+                        vx: 0, vy: 0, angle: angle
+                    });
+                }
+            }
+            resizeCanvas();
+            canvas.addEventListener('mousemove', (e) => { const rect = canvas.getBoundingClientRect(); mouse.targetX = e.clientX - rect.left; mouse.targetY = e.clientY - rect.top; mouse.strength = 1; });
+            canvas.addEventListener('mouseleave', () => { mouse.strength = 0; });
+            canvas.addEventListener('mousedown', () => { pulseStrength = 25; });
+            let animationTime = 0;
+            function animateBlob() {
+                animationTime += 0.015;
+                mouse.x += (mouse.targetX - mouse.x) * 0.1;
+                mouse.y += (mouse.targetY - mouse.y) * 0.1;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let chromeGrad = ctx.createRadialGradient(centerX - 40, centerY - 40, 10, centerX, centerY, radius * 1.5);
+                chromeGrad.addColorStop(0, '#ffffff');
+                chromeGrad.addColorStop(0.2, '#e2e8f0');
+                chromeGrad.addColorStop(0.5, '#475569');
+                chromeGrad.addColorStop(0.8, '#0f172a');
+                chromeGrad.addColorStop(1, '#000000');
+                ctx.beginPath();
+                for (let i = 0; i < numPoints; i++) {
+                    let p = points[i];
+                    let noise = Math.sin(p.angle * 8 + animationTime * 3) * 6;
+                    let secondaryNoise = Math.cos(p.angle * 3 - animationTime * 1.5) * 4;
+                    let dx = p.x - mouse.x, dy = p.y - mouse.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+                    let mouseInfluence = (dist < mouse.radius && mouse.strength > 0) ? ((mouse.radius - dist) / mouse.radius) * 45 * mouse.strength : 0;
+                    let currentRadius = radius + noise + secondaryNoise + mouseInfluence + (Math.sin(animationTime * 4) * pulseStrength);
+                    let targetX = centerX + Math.cos(p.angle) * currentRadius;
+                    let targetY = centerY + Math.sin(p.angle) * currentRadius;
+                    p.vx += (targetX - p.x) * 0.08;
+                    p.vy += (targetY - p.y) * 0.08;
+                    p.vx *= 0.85; p.vy *= 0.85;
+                    p.x += p.vx; p.y += p.vy;
+                    if (i === 0) ctx.moveTo(p.x, p.y);
+                    else ctx.lineTo(p.x, p.y);
+                }
+                ctx.closePath();
+                ctx.fillStyle = chromeGrad;
+                ctx.fill();
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.stroke();
+                if (pulseStrength > 0) pulseStrength *= 0.92;
+                requestAnimationFrame(animateBlob);
+            }
+            animateBlob();
+        }
+
+        function copyEmailAddress(element) {
+            const emailText = document.getElementById('email-address').innerText;
+            const tempInput = document.createElement('input');
+            tempInput.value = emailText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            const toast = document.getElementById('copyToast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+        window.copyEmailAddress = copyEmailAddress;
+    </script>
+</body>
+</html>
